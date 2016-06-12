@@ -3,7 +3,7 @@ CREATE DATABASE `bicycleEC`;
 use bicycleEC;
 
 CREATE TABLE `products` (
-  `product_id` int primary key auto_increment,
+  `id` int primary key auto_increment,
   `name` varchar(100) NOT NULL,
   `body` varchar(255) NOT NULL,
   `price` int(32) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE `products` (
 );
 
 CREATE TABLE `members` (
-  `member_id` int primary key auto_increment,
+  `id` int primary key auto_increment,
   `name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `addr` varchar(255) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE `members` (
 );
 
 CREATE TABLE `purchase` (
-  `purchase_id` primary key auto_increment,
+  `id` primary key auto_increment,
   `member_id` int(8) NOT NULL,
   `product_id` int(8) NOT NULL,
   `OK_flag` bit,

@@ -2,16 +2,31 @@
 
 class ProductsController extends AppController{
 
+  public $components = [
+      'Paginator' => [
+          'limit' => 10,
+          'order' => ['created' => 'desc']
+      ]
+  ];
+
   public function index(){
     $this->set('products',$this->Product->find('all'));
   }
 
-  public function view($product_id = null){
-    if(!$this->Product->exists($product_id)){
+  public function view($id = null){
+    if(!$this->Product->exists($id)){
       throw new NotFoundException('Not Found');
     }
 
-    $this->set('product',$this->Product->findById($product_id));
+    $this->set('product',$this->Product->findById($id));
+  }
+
+  public function purchase($id = null){
+      if(!$this->Product->exists($id)){
+      throw new NotFoundException('Not Found');
+    }
+
+    $this->set('product',$this->Product->findById($id));
   }
 
 }

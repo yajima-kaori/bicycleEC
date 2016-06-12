@@ -7,7 +7,7 @@
         <td>
         <?= $this->Html->link(
             $product['Product']['name'],
-            ['action' => 'view',$product['Product']['product_id']]
+            ['action' => 'view',$product['Product']['id']]
 
             );
          ?>
@@ -16,3 +16,9 @@
   <?php endforeach; ?>
   </tbody>
 </table>
+
+<div>
+  <?= $this->Pagenator->prev('<前へ'); ?>&nbsp;
+  <?= $this->Pagenator->numbers(); ?>&nbsp;
+  <?= $this->Pagenator->next('次へ>'); ?>
+</div>
