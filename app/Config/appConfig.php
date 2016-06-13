@@ -1,3 +1,3 @@
 <?php
 
-$config['Photo'] = '/img/1.jpg';
+$config['Photo'] = '/img/';

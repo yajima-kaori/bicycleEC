@@ -8,8 +8,7 @@ class ProductHelper extends AppHelper{
 
     $photo = Configure::read('Photo');
 
-    $path = $photo;
-     // . $product['Product']['photo'];
+    $path = $photo . $product['Product']['photo'];
 
     return $this->Html->image($path,$options);
 

@@ -12,7 +12,8 @@ class ProductsController extends AppController{
   ];
 
   public function index(){
-    $this->set('products',$this->Product->find('all'));
+    $this->set('products',$this->Paginator->paginate());
+    // $this->set('products',$this->Product->find('all'));
   }
 
   public function view($id = null){
