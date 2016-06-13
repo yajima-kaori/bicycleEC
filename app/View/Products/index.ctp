@@ -5,6 +5,16 @@
   <?php foreach($products as $product) :?>
     <tr>
         <td>
+          <?= $this->Html->link(
+              $this->Product->photoImage($product,['style' => 'width:100%']),
+              ['action' => 'view',$product['Product']['id']],
+              ['escape' => false]
+            );
+         ?>
+        </td>
+        <td><?= $this->Html->image('aiueo.png',['alt'=>'']); ?>
+        </td>
+        <td>
         <?= $this->Html->link(
             $product['Product']['name'],
             ['action' => 'view',$product['Product']['id']]
@@ -18,7 +28,7 @@
 </table>
 
 <div>
-  <?= $this->Pagenator->prev('<前へ'); ?>&nbsp;
-  <?= $this->Pagenator->numbers(); ?>&nbsp;
-  <?= $this->Pagenator->next('次へ>'); ?>
+  <?= $this->Paginator->prev('<前へ'); ?>&nbsp;
+  <?= $this->Paginator->numbers(); ?>&nbsp;
+  <?= $this->Paginator->next('次へ>'); ?>
 </div>

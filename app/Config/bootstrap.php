@@ -67,13 +67,15 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::load('DebugKit'); // Loads a single plugin named DebugKit
  */
 
-CakePlugin::load(array('DebugKit'));
+CakePlugin::load(['DebugKit','Upload']);
 
 /**
  * To prefer app translation over plugin translation, you can set
  *
  * Configure::write('I18n.preferApp', true);
  */
+
+Configure::load('appConfig.php');
 
 /**
  * You can attach event listeners to the request lifecycle as Dispatcher Filter. By default CakePHP bundles two filters:

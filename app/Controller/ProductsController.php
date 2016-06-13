@@ -2,6 +2,8 @@
 
 class ProductsController extends AppController{
 
+  public $helpers = ['Product'];
+
   public $components = [
       'Paginator' => [
           'limit' => 10,
