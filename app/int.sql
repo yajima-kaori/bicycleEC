@@ -17,7 +17,7 @@ CREATE TABLE `members` (
   `name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL UNIQUE,
   `addr` varchar(255) NOT NULL,
-  `password` varchar(12) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL
 );

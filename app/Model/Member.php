@@ -35,6 +35,16 @@ class Member extends AppModel {
                 'message' => 'パスワード(確認)を入力してください'
             ],
         ],
+        'password_current' =>[
+            'required'=> [
+                'rule' => 'notBlank',
+                'message' => 'パスワードが入力されていません｡',
+            ],
+            'match' => [
+                'rule' => 'checkCurrentPassword',
+                'message' => 'パスワードが一致していません'
+            ]
+        ],
     ];
 
     // カスタムバリデーションメソッド
@@ -45,6 +55,20 @@ class Member extends AppModel {
             return true;
         }
 
+        return false;
+    }
+
+    public function checkCurrentPassword($check){
+
+        $password = array_values($check)[0];
+
+        $member = $this->findById($this->data['Member']['id']);
+
+        $passwordHasher = new BlowfishPasswordHasher();
+
+        if($passwordHasher->check($password,$member['Member']['password'])){
+            return true;
+        }
         return false;
     }
 

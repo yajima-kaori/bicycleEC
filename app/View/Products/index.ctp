@@ -1,5 +1,11 @@
 <h2>商品一覧</h2>
 
+<?php if ($currentUser) : ?>
+    <div style="text-align: right;">
+        <span><?= $this->Html->link('新規追加', ['action' => 'add']) ?></span>
+    </div>
+<?php endif; ?>
+
 <div>
     <?php foreach($products as $product) :?>
       <div class="item">

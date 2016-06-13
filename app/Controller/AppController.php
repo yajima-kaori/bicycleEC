@@ -33,6 +33,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
   public function beforeFilter(){
+    $this->set('currentUser',$this->Auth->user());
 
   }
 
