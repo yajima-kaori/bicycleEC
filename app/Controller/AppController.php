@@ -31,5 +31,38 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-  public $components = array('DebugKit.Toolbar','Flash');
+
+  public function beforeFilter(){
+
+  }
+
+  public $components = [
+        'DebugKit.Toolbar',
+        'Flash',
+        'Auth' => [
+            'loginAction' => [
+                'controller' => 'members',
+                'action' => 'login',
+            ],
+            'authenticate' => [
+                'Form' => [
+                    'MemberModel' => 'Member',
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password',   // （デフォルト値と同じな為、省略可）
+                    ],
+                    'passwordHasher' => 'Blowfish', // パスワードがハッシュ化されている方式を指定
+                ]
+            ],
+            'loginRedirect' => [
+                'controller' => 'products',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'products',
+                'action' => 'index'
+            ],
+            'authError' => 'ログインしてください',   // ログインが必要なページにアクセスした時のメッセージ
+        ],
+    ];
 }

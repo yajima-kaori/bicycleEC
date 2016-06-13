@@ -11,6 +11,12 @@ class ProductsController extends AppController{
       ]
   ];
 
+  public function beforeFilter(){
+    parent::beforeFilter();
+
+    $this->Auth->allow('index','view');
+  }
+
   public function index(){
     $this->set('products',$this->Paginator->paginate());
     // $this->set('products',$this->Product->find('all'));

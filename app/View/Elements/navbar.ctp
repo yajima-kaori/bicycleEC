@@ -6,5 +6,12 @@
             ['controller' => 'products','action' => 'index']
             ); ?>
       </li>
+      <li style="float: right;">
+            <?= $this->Html->link(
+            '新規会員登録',
+            ['controller' => 'members','action' => 'add']
+
+          ); ?>
+      </li>
   </ul>
 </div>
