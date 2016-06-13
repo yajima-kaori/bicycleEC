@@ -1,6 +1,6 @@
-  <h2>ログイン</h2>
+<h2>ログイン</h2>
 
-  <div>
+<div>
     <?= $this->Flash->render('auth'); ?>
 
     <?= $this->Form->create('Member'); ?>
@@ -9,4 +9,5 @@
         <?= $this->Form->input('password', ['label' => 'パスワード']); ?>
     </fieldset>
     <?= $this->Form->end('ログイン'); ?>
-  </div>
+
+</div>

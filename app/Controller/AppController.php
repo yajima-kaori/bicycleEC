@@ -46,7 +46,7 @@ class AppController extends Controller {
             ],
             'authenticate' => [
                 'Form' => [
-                    'MemberModel' => 'Member',
+                    'userModel' => 'Member',
                     'fields' => [
                         'username' => 'email',
                         'password' => 'password',   // （デフォルト値と同じな為、省略可）

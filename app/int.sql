@@ -15,19 +15,19 @@ CREATE TABLE `products` (
 CREATE TABLE `members` (
   `id` int primary key auto_increment,
   `name` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL UNIQUE,
   `addr` varchar(255) NOT NULL,
-  `password` int(8) NOT NULL,
+  `password` varchar(12) NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL
 );
 
-CREATE TABLE `purchase` (
+CREATE TABLE `purchases` (
   `id` int primary key auto_increment,
   `member_id` int(8) NOT NULL,
   `product_id` int(8) NOT NULL,
-  `OK_flag` bit,
-  `NG_flag` bit,
+  `OK_flag` varchar(2),
+  `NG_flag` varchar(2),
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL
 );

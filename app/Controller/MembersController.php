@@ -20,15 +20,16 @@ class MembersController extends AppController{
 
   }
 
-  public function login(){
-    if($this->request->is('post')){
-      if($this->Auth->login()){
-        $this->redirect($this->Auth->redirectUrl());
-      }
+  public function login() {
 
-      $this->Flash->error('メールアドレスかパスワードが違います｡');
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                $this->redirect($this->Auth->redirectUrl());
+            }
+
+            $this->Flash->error('メールアドレスかパスワードが違います');
+        }
     }
-  }
 
     public function logout(){
       $this->redirect($this->Auth->logout());
