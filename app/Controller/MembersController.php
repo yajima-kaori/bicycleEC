@@ -22,17 +22,19 @@ class MembersController extends AppController{
 
   public function edit(){
     if($this->request->is(['post','put'])){
-      $this->Flash->success('会員情報を変更しました');
 
-      $member = $this->Member->find('first',[
+      if($this->Member->save($this->request->data)){
+        $this->Flash->success('会員情報を変更しました');
+
+      $user = $this->Member->find('first',[
                 'fields' => ['id','email'],
-                'conditions' =>['id' => $this->Auth->member('id')]
+                'conditions' =>['id' => $this->Auth->user('id')]
                 ]);
-     $this->Auth->login($member['user']);
+     $this->Auth->login($user['Member']);
 
      return $this->redirect($this->Auth->redirectUrl());
-    }
-    else{
+     }
+   }else{
       $this->request->data = $this->Member->findById($this->Auth->user('id'));
     }
   }
