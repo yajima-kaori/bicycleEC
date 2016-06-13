@@ -10,6 +10,10 @@ class MembersController extends AppController{
 
   public function add(){
 
+    if($this->Auth->user()){
+      return $this->redirect($this->Auth->redirectUrl());
+    }
+
     if($this->request->is('post')){
        $this->Member->create();
        if($this->Member->save($this->request->data)){
@@ -53,7 +57,11 @@ class MembersController extends AppController{
       }
   }
 
-  public function login() {
+    public function login() {
+
+        if ($this->Auth->user()) {
+            return $this->redirect($this->Auth->redirectUrl());
+        }
 
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -63,6 +71,7 @@ class MembersController extends AppController{
             $this->Flash->error('メールアドレスかパスワードが違います');
         }
     }
+
 
     public function logout(){
       $this->redirect($this->Auth->logout());

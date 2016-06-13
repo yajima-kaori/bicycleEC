@@ -22,6 +22,23 @@ CREATE TABLE `members` (
   `updated` datetime NOT NULL
 );
 
+CREATE TABLE `reviews` (
+  `id` int(8) primary key auto_increment,
+  `member_id` int(8) NOT NULL,
+  `product_id` int(8) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `score` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL
+);
+
+ALTER TABLE `reviews` ADD KEY `member_id` (`member_id`), ADD KEY `product_id` (`product_id`);
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`);
+
+
 CREATE TABLE `purchases` (
   `id` int primary key auto_increment,
   `member_id` int(8) NOT NULL,
