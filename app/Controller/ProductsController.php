@@ -2,6 +2,8 @@
 
 class ProductsController extends AppController{
 
+  public $uses = ['Product','Review'];
+
   public $helpers = ['Product'];
 
   public $components = [
@@ -27,7 +29,21 @@ class ProductsController extends AppController{
       throw new NotFoundException('Not Found');
     }
 
-    $this->set('product',$this->Product->findById($id));
+    $reviewLabel = '投稿';
+
+    if($this->Auth->user() && $this->Review->getData($id,$this->Auth->user('id'))){
+      $reviewLabel = '編集';
+    }
+
+    $averageScore = $this->Review->getAveScoreByProductId($id);
+
+    $this->Product->recursive = 2;
+    $product = $this->Product->findById($id);
+
+    $this->set('reviewLabel', $reviewLabel);
+    $this->set('averageScore', $averageScore);
+    $this->set('product',$product);
+
   }
 
   public function purchase($id = null){

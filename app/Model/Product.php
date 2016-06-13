@@ -14,4 +14,10 @@ class Product extends AppModel{
 
   ];
 
+  public $hasMany = [
+    'Review' => [
+        'className' => 'Review'
+    ]
+  ];
+
 }

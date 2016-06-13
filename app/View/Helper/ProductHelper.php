@@ -14,5 +14,15 @@ class ProductHelper extends AppHelper{
 
   }
 
+  public function scoreList(){
+    return[
+            1 => '★☆☆☆☆',
+            2 => '★★☆☆☆',
+            3 => '★★★☆☆',
+            4 => '★★★★☆',
+            5 => '★★★★★',
+          ];
+  }
+
 
 }

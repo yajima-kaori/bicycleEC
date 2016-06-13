@@ -6,16 +6,10 @@
   <h2>レビュー</h2>
 
   <?= $this->Form->create('Review'); ?>
-  <?= $this->Form->input('scor'e',[
+  <?= $this->Form->input('score',[
         'label' => '点数',
-        'type' => 'select'
-        'options' => [
-            1 => '★☆☆☆☆',
-            2 => '★★☆☆☆',
-            3 => '★★★☆☆',
-            4 => '★★★★☆',
-            5 => '★★★★★',
-        ]
+        'type' => 'select',
+        'options' => $this->Product->scoreList()
   ]);
   ?>
 

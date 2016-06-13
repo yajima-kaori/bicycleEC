@@ -27,7 +27,7 @@ class Review extends AppModel{
             ]
         ]
     ];
-}
+
       public function getData($productId,$memberId){
 
         $options =[
@@ -38,6 +38,26 @@ class Review extends AppModel{
         ];
 
         return $this->find('first',$options);
+      }
+
+      public function getAveScoreByProductId($productId){
+
+         $options =[
+              'fileds' => 'AVG(score) as avg',
+              'conditions' => ['product_id' => $productId],
+              'group' => ['product_id']
+         ];
+
+          $data = $this->find('first',$options);
+
+          $avg = 0;
+
+          if(!empty($data[0]['avg'])){
+            $avg = round($data[0]['ave'],1);
+          }
+
+          return $avg;
+
       }
 
 }
