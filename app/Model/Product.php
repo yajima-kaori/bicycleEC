@@ -29,7 +29,6 @@ class Product extends AppModel{
 
     // var_dump($_SESSION['product_id']);
     // var_dump($_SESSION['member_id']);
-
   }
 
 }

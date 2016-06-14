@@ -12,6 +12,12 @@ class PurchasesController extends AppController{
       'Session'
   ];
 
+    public function beforeFilter(){
+    parent::beforeFilter();
+
+    $this->Auth->allow('management');
+    }
+
     public function approval($id = null){
 
       $product_id = $this->Session->read('product_id');
@@ -46,14 +52,41 @@ class PurchasesController extends AppController{
       $data = ['Purchase' =>
               ['member_id' => $member['Member']['id'],
                'product_id' => $product['Product']['id'],
+               'OK_flag' => 0,
+               'NG_flag' => 1,
                ]
               ];
 
       $this->Purchase->save($data);
 
     }
-    public function management(){
-      $this->set('products',$this->Purchase->find('all'));
 
+    public function management(){
+
+      $this->set('purchases',$this->Purchase->find('all'));
+
+      if($this->request->is(['post','put'])){
+        // var_dump($_POST['data']['Purchase']);
+
+        $id = $this->request->data($_POST['data']['Purchase']);
+
+        $data = ['Purchase' =>
+                   ['id' => $id,
+                    'OK_flag' => 1,
+                    'NG_flag' => 0,
+                   ]
+                ];
+        $fields = ['OK_flag','NG_flag'];
+
+        if($this->Purchase->save($data, false, $fields)){
+
+           $this->Flash->success('対応完了しました｡');
+          }
+
+          $this->Flash->error('エラーが発生しました');
+
+       }
     }
+
+
 }
