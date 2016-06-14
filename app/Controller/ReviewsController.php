@@ -38,6 +38,26 @@ class ReviewsController extends AppController{
     $this->set('productId',$productId);
     $this->set('isNew',$isNew);
 
-
   }
+
+      public function delete($id = null) {
+        if (!$this->Review->exists($id)) {
+            throw new NotFoundException('レビューがみつかりません');
+        }
+
+        $productId = $this->Review->findById($id)['Review']['product_id'];
+
+        $this->request->allowMethod(['post', 'delete']);
+        if ($this->Review->delete($id)) {
+            $this->Flash->success('レビューを削除しました');
+
+            return $this->redirect([
+                    'controller' => 'products',
+                    'action' => 'view',
+                    $productId
+                ]);
+        } else {
+            $this->Flash->error('レビューを削除できませんでした');
+        }
+      }
 }

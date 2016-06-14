@@ -43,7 +43,7 @@ class Review extends AppModel{
       public function getAveScoreByProductId($productId){
 
          $options =[
-              'fileds' => 'AVG(score) as avg',
+              'fields' => 'AVG(score) as avg',
               'conditions' => ['product_id' => $productId],
               'group' => ['product_id']
          ];
@@ -53,7 +53,7 @@ class Review extends AppModel{
           $avg = 0;
 
           if(!empty($data[0]['avg'])){
-            $avg = round($data[0]['ave'],1);
+            $avg = round($data[0]['avg'],1);
           }
 
           return $avg;

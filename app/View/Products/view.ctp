@@ -17,12 +17,14 @@
           <td><?= $product['Product']['body']; ?></td>
         </tr>
         <tr>
+        <td>
           <?php if(count($product['Review']) > 0) : ?>
           <?= $this->Product->scoreList()[round($averageScore)]; ?>&nbsp;
               ( <?= $averageScore; ?> )
           <?php else: ?>
           <p>まだ、レビューがありません。</p>
           <?php endif; ?>
+        </td>
         </tr>
       </tbody>
   </table>
@@ -30,7 +32,7 @@
           <div style="text-align:center">
           <button id="cart"><?= $this->Html->link(
             'カートに入れる',
-            ['action' => 'purchase',$product['Product']['id']]
+            ['controller' => 'purchases' , 'action' => 'approval']
             );
             ?></button></td>
           </div>

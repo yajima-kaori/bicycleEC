@@ -45,6 +45,16 @@
     float: left;
 }
 
+.cart{
+    background:url('http://192.168.33.10/homework/bicycleEC/img/cart.png') no-repeat;
+    height: 80px;
+}
+
+.cart h2{
+    margin-left: 70px;
+    line-height: 60px;
+}
+
 #cart{
     margin-top: 40px;
     border-style:none;

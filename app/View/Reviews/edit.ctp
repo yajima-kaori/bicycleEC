@@ -18,3 +18,13 @@
 <?= $this->Form->hidden('id'); ?>
 <?= $this->Form->hidden('product_id', ['value' => $productId]); ?>
 <?= $this->Form->end($submitLabel); ?>
+
+<?php if ($this->request->data) : ?>
+    <div style="float: right; margin-right: 50px; margin-top: -55px; font-size: 18px;">
+        <?= $this->Form->postLink(
+            '削除',
+            ['action' => 'delete', $this->request->data['Review']['id']],
+            ['confirm' => '本当に削除してよろしいですか？']
+        ); ?>
+    </div>
+<?php endif; ?>

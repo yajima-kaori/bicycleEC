@@ -1,11 +1,5 @@
 <h2>商品一覧</h2>
 
-<?php if ($currentUser) : ?>
-    <div style="text-align: right;">
-        <span><?= $this->Html->link('新規追加', ['action' => 'add']) ?></span>
-    </div>
-<?php endif; ?>
-
 <div>
     <?php foreach($products as $product) :?>
       <div class="item">
@@ -26,7 +20,22 @@
            ?>
            </div>
             <div style="text-align:center;">
-            ¥<?= number_format($product['Product']['price']); ?>
+              <div>¥<?= number_format($product['Product']['price']); ?></div>
+              <div>
+                <?php
+                    if($product['Product']['cnt'] > 0 )
+                    {
+                        printf("レビュー: %d 件<br>%s ( %.1f )",
+                        $product['Product']['cnt'],
+                        $this->Product->scoreList()[round((int)$product['Product']['avg'])],
+                        $product['Product']['avg']
+                      );
+                    }
+                    else{
+                      echo 'レビュー: 0件';
+                    }
+                ?>
+              </div>
            </div>
       </div>
     <?php endforeach; ?>

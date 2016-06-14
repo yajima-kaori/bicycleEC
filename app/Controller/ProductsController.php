@@ -10,7 +10,8 @@ class ProductsController extends AppController{
       'Paginator' => [
           'limit' => 10,
           'order' => ['created' => 'desc']
-      ]
+      ],
+      'Session'
   ];
 
   public function beforeFilter(){
@@ -22,6 +23,42 @@ class ProductsController extends AppController{
   public function index(){
     $this->set('products',$this->Paginator->paginate());
     // $this->set('products',$this->Product->find('all'));
+
+    $this->Product->virtualFields['cnt'] = 0;
+    $this->Product->virtualFields['avg'] = 0;
+    $this->Product->recursive = -1;
+
+    $this->Paginator->settings = [
+          'Product' => [
+              'limit' => 10,
+              'order' => [
+                  'Product.created' => 'desc',
+                  'Product.name' => 'asc',
+              ],
+
+              'joins' => [
+                  [
+                      'type' => 'LEFT',
+                      'table' => 'reviews',
+                      'alias' => 'Review',
+                      'conditions' => 'Product.id = Review.product_id',
+                  ],
+              ],
+
+              'fields' => [
+                  'Product.id', 'Product.name', 'Product.price','Product.photo',
+                  'count(Review.id) as Product__cnt',
+                  'avg(Review.score) as Product__avg',
+              ],
+              'group' => ['Product.id'],
+          ],
+      ];
+          $products = $this->Paginator->paginate('Product');
+
+          // debug($products);
+          // exit;
+         $this->set('products', $products);
+
   }
 
   public function view($id = null){
@@ -44,14 +81,14 @@ class ProductsController extends AppController{
     $this->set('averageScore', $averageScore);
     $this->set('product',$product);
 
+
+    $this->Session->write('product_id', $id);
+    $this->Session->write('member_id', $this->Auth->user('id'));
+
+    // var_dump($_SESSION['product_id']);
+    // var_dump($_SESSION['member_id']);
+
   }
 
-  public function purchase($id = null){
-      if(!$this->Product->exists($id)){
-      throw new NotFoundException('Not Found');
-    }
-
-    $this->set('product',$this->Product->findById($id));
-  }
 
 }
